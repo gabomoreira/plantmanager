@@ -1,33 +1,32 @@
-import { Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { Entypo, Feather } from "@expo/vector-icons"
+import { Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Dimensions, View } from "react-native"
 
 import logoImg from '../assets/plantlogo.png'
 import colors from "../styles/colors"
+import fonts from "../styles/fonts"
 
 export const Welcome = () => {
   return (
    <SafeAreaView style={styles.container}>
-        <StatusBar backgroundColor='transparent' />
-
-        <Text style={styles.title}>
-            Gerencie {'\n'}
-            suas plantas {'\n'}
-            de forma fácil.
-        </Text>
-
-        <Image source={logoImg} style={styles.logo} />
-
-        <Text style={styles.subtitle}>
-            Não esqueça mais de regar suas plantas.
-            Nós cuidamdos de lembrar você {'\n'}
-            sempre que precisar.
-        </Text>
-
-        <TouchableOpacity style={styles.button} activeOpacity={.7}>
-            <Text style={styles.buttonText}>
-                >
+        <View style={styles.wrapper}>
+            <Text style={styles.title}>
+                Gerencie {'\n'}
+                suas plantas de {'\n'}
+                forma fácil
             </Text>
-        </TouchableOpacity>
 
+            <Image source={logoImg} style={styles.logo} resizeMode='contain' />      
+
+            <Text style={styles.subtitle}>
+                Não esqueça mais de regar suas {'\n'}
+                plantas. Nós cuidamdos de lembrar você {'\n'}
+                sempre que precisar.
+            </Text>
+
+            <TouchableOpacity style={styles.button} activeOpacity={.7}>
+                <Feather name="chevron-right" style={styles.buttonIcon} />
+            </TouchableOpacity>
+        </View>
    </SafeAreaView>
   )
 }
@@ -35,26 +34,31 @@ export const Welcome = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    wrapper: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around',
+        paddingHorizontal: 20
     },
     logo: {
-        height: 292,
-        width: 284,
-        borderRadius: 16
+        height: Dimensions.get('window').width * .7,
+        width: Dimensions.get('window').width * .8,
+        borderRadius: 16,
     },
     title: {
-        fontSize: 32,
-        fontWeight: 'bold',
+        fontSize: 28,
         textAlign: 'center',
         color: colors.heading,
-        marginTop: 38
+        marginTop: 38,
+        fontFamily: fonts.heading,
+        lineHeight: 34
     },
     subtitle: {
+        fontFamily: fonts.text,
         fontSize: 18,
         textAlign: 'center',
         color: colors.heading,
-        paddingHorizontal: 20
     },
     button: {
         backgroundColor: colors.green,
@@ -65,8 +69,8 @@ const styles = StyleSheet.create({
         height: 56,
         width: 56
     },
-    buttonText: {
-        fontSize: 24,
+    buttonIcon: {
+        fontSize: 32,
         color: colors.white
     }
 })
