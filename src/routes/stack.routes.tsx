@@ -6,6 +6,7 @@ import { Welcome } from "../screens/Welcome";
 
 import colors from "../styles/colors";
 import React from "react";
+import { PlantSelect } from "../screens/PlantSelect";
 
 const {Navigator, Screen} = createStackNavigator()
 
@@ -23,6 +24,7 @@ const StackRoutes: React.FC = () => {
             <Screen name='Welcome' component={Welcome} />
             <Screen name='UserIdentification' component={UserIdentification} />
             <Screen name='Confirmation' component={Confirmation} />
+            <Screen name='PlantSelect' component={PlantSelect} />
         </Navigator>
     )
 }
