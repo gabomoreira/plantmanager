@@ -1,14 +1,15 @@
-import { TouchableOpacity, Text, StyleSheet } from "react-native"
+import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from "react-native"
 import colors from "../styles/colors"
 import fonts from "../styles/fonts"
 
-type Props = {
+interface Props extends TouchableOpacityProps {
     title: string
+    disabled?: boolean
 }
 
-export const Button = ({title}: Props) => {
+export const Button = ({title, disabled, ...rest}: Props) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={[styles.container, disabled && {backgroundColor: colors.green_light}]} disabled={disabled} {...rest}>
         <Text style={styles.text}>
             {title}
         </Text>

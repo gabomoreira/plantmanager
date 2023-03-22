@@ -1,4 +1,5 @@
 import { Entypo, Feather } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/native"
 import { Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Dimensions, View } from "react-native"
 
 import logoImg from '../assets/plantlogo.png'
@@ -6,6 +7,12 @@ import colors from "../styles/colors"
 import fonts from "../styles/fonts"
 
 export const Welcome = () => {
+    const navigation = useNavigation()
+
+    function hadleStart(){
+        navigation.navigate('UserIdentification')
+    }
+
   return (
    <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
@@ -23,7 +30,7 @@ export const Welcome = () => {
                 sempre que precisar.
             </Text>
 
-            <TouchableOpacity style={styles.button} activeOpacity={.7}>
+            <TouchableOpacity style={styles.button} activeOpacity={.7} onPress={hadleStart}>
                 <Feather name="chevron-right" style={styles.buttonIcon} />
             </TouchableOpacity>
         </View>

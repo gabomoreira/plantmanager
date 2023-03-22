@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
-import { SafeAreaView, Text, View, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, Platform } from "react-native"
+import { SafeAreaView, StyleSheet, Text, View } from "react-native"
 
 import { Button } from "../components/Button"
 
@@ -7,23 +8,10 @@ import colors from "../styles/colors"
 import fonts from "../styles/fonts"
 
 export const Confirmation = () => {
-    const [isFocused, setIsFocused] = useState(false)
-    const [isFilled, setIsFilled] = useState(false)
-    const [name, setName] = useState<string>()
+    const navigation = useNavigation()
 
-    
-    function hadleInputBlur() {
-        setIsFocused(false)
-        setIsFilled(!!name)
-    }
-
-    function hadleInputFocus() {
-        setIsFocused(true)
-    }
-
-    function handleInputChange(value: string) {
-        setIsFilled(!!value)
-        setName(value)
+    function handleStart(){
+        // navigation.navigate('Confirmation')
     }
 
   return (
@@ -41,7 +29,7 @@ export const Confirmation = () => {
                 </Text>
 
                 <View style={styles.footer}>
-                    <Button title="Confirmar"/>
+                    <Button title="Começar" onPress={handleStart} />
                 </View>
             </View>
     </SafeAreaView>
