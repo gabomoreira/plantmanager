@@ -1,0 +1,112 @@
+{
+    "plants_water_frequencies": [
+        {"key": "day", "title": "Todos os dias"},
+        {"key": "week", "title": "A cada semana"}
+    ],
+
+    "plants_environment": [
+        {"key": "living_room", "title": "Sala"},
+        {"key": "bedroom", "title": "Quarto"},
+        {"key": "kitchen", "title": "Cozinha"},
+        {"key": "bathroom", "title": "Banheiro"}
+    ],
+
+    "plants": [
+        {
+            "id": 1,
+            "name": "Aningapara",
+            "about": "É uma espécie tropical que tem crescimento rápido e...",
+            "water_tips": "Mantenha a terra úmida sem encharcar. R...",
+            "photo": "https://d2r9epyceweg5n.cloudfront.net/stores/001/114/413/products/costela-de-adao-copiar1-6b7eca5b25c2e932c216509912187510-480-0.png",
+            "environments": ["living_room", "kitchen"],
+            "frequency": {
+                "times": 2,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Zamioculca",
+            "about": "Apesar de florescer na primavera, fica o ano todo bonita ...",
+            "water_tips": "Utilize vazos com furos e pedras no fundo para facilitar ...",
+            "photo": "https://cdn.awsli.com.br/496/496853/arquivos/zamioculca%20verde3_adobe_express.png",
+            "environments": ["bedroom"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "day"
+            }
+        },
+        {
+            "id": 3,
+            "name": "Peperomia",
+            "about": "Adapta-se tanto ao sol e sombra, mas prefere ficar num...",
+            "water_tips": "Nos dias mais quentes borrife água nas folhas. Regue ...",
+            "photo": "https://aquaplant.es/wp-content/uploads/2021/03/4PEOBHA20-1.png",
+            "environments": ["bedroom"],
+            "frequency": {
+                "times": 3,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 4,
+            "name": "Imbé",
+            "about": "De médio porte que se adapta a diversas regiões, além de",
+            "water_tips": "Mantenha a terra sempre húmida sem encharcar. Regue...",
+            "photo": "https://www.saindodamatrix.com.br/sdm_wings/saindodamatrix/wp-content/uploads/philodendron1.png",
+            "environments": ["bedroom", "living_room"],
+            "frequency": {
+                "times": 2,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Espada São Jorge",
+            "about": "O aroma reduz os níveis de ansiedade e seu cheiro ajuda...",
+            "water_tips": "Regue o solo ao redor. Regue 1 vez ao dia.",
+            "photo": "https://images.squarespace-cdn.com/content/v1/5728dc7cd51cd4809e7aaa01/1462299802803-WJU1ITIZ78F3Z7D2ZX92/Espada+de+S%C3%A3o+Jorge.png",
+            "environments": ["bedroom", "living_room"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "day"
+            }
+        },
+        {
+            "id": 6,
+            "name": "Yuuca",
+            "about": "São indicadas pois são fáceis de manter e cuidar. Você",
+            "water_tips": "Graças à reserva de água dessas verdinhas, é sempre...",
+            "photo": "https://elho.xcdn.nl/RM2000,2000,C_OQ70/greenville-round-30cm-living-concrete/greenville_round__living_concrete_yucca_elephantipes.c1.png",
+            "environments": ["kitchen", "bedroom"],
+            "frequency": {
+                "times": 1,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 7,
+            "name": "Frutíferas",
+            "about": "Exigem algumas horinhas de sol por dia, por isso deixe...",
+            "water_tips": "Regue sempre na terra e não nas folhas. Regue 3 vezes...",
+            "photo": "https://www.citrina-plants.com/uploads/media/cache/7dcd5a3826c114359fd0730e1bde1c7c_TC5Vqsk_media_big_thumbnail.png",
+            "environments": ["kitchen", "living_room"],
+            "frequency": {
+                "times": 3,
+                "repeat_every": "week"
+            }
+        },
+        {
+            "id": 8,
+            "name": "Orquídea",
+            "about": "Traz sensação de tranquilidade e paz ao ambiente. Requer...",
+            "water_tips": "Regue moderadamente. Regue 4 vez na semana.",
+            "photo": "https://images.tcdn.com.br/img/img_prod/865814/flor_de_orquidea_96cm_9529_1_b105d1af64b88b17edd8b03373f27b43.png",
+            "environments": ["bathroom"],
+            "frequency": {
+                "times": 4,
+                "repeat_every": "week"
+            }
+        }
+    ]
+}

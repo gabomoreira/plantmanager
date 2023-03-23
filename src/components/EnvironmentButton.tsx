@@ -8,10 +8,10 @@ interface Props extends RectButtonProps {
     active?: boolean
 }
 
-export const EnvironmentButton = ({title, active, ...rest}: Props) => {
+export const EnvironmentButton = ({title, active = false, ...rest}: Props) => {
   return (
-    <RectButton style={[styles.container]} {...rest}>
-        <Text style={styles.text}>
+    <RectButton style={[styles.container, active && styles.containerActive]} {...rest}>
+        <Text style={[styles.text, active && styles.textActive]}>
             {title}
         </Text>
     </RectButton>
@@ -20,15 +20,24 @@ export const EnvironmentButton = ({title, active, ...rest}: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.green,
-        height: 56,
-        borderRadius: 16,
+        backgroundColor: colors.shape,
+        height: 40,
+        width: 76,
+        borderRadius: 12,
         justifyContent: "center",
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 5
+    },
+    containerActive: {
+        backgroundColor: colors.green_light
     },
     text: {
-        fontSize: 16,
-        color: colors.white,
-        fontFamily: fonts.heading
+        color: colors.heading,
+        fontFamily: fonts.text
     },
+    textActive: {
+        fontFamily: fonts.heading,
+        color: colors.green_dark,
+
+    }
 })
