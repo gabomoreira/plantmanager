@@ -5,6 +5,8 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native"
 import { Button } from "../components/Button"
 import { EnvironmentButton } from "../components/EnvironmentButton"
 import { Header } from "../components/Header"
+import { Load } from "../components/Load"
+import { PlantCardVertical } from "../components/PlantCardVertical"
 import api from "../services/api"
 
 import colors from "../styles/colors"
@@ -15,17 +17,40 @@ interface EnvironmentProps {
     title: string
 }
 
+interface PlantProps {
+    id: number
+    name: string
+    about: string
+    water_tips: string
+    photo: string
+    environments: [string]
+    frequency: {
+        times: number
+        repeat_every: string
+    }
+}
+
 export const PlantSelect = () => {
     const navigation = useNavigation()
 
     const [environments, setEnvironments] = useState<EnvironmentProps[]>()
+    const [environmentSelected, setEnvironmentSelected] = useState('all')
+    const [plants, setPlants] = useState<PlantProps[]>()
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>()
+    const [loading, setLoading] = useState(true)
 
-    function handleStart(){
-        // navigation.navigate('Confirmation')
+    function handleEnvironmentSelected(environment: string) {
+        setEnvironmentSelected(environment)
+
+        if(environment === 'all') return setFilteredPlants(plants)
+
+        const filtered = plants?.filter(i => i.environments.includes(environment))
+        setFilteredPlants(filtered)
+
     }
 
     async function fetchEnvironment() {
-        const {data} = await api.get('plants_environment')
+        const {data} = await api.get('plants_environment?_sort=title&_order=asc')
         setEnvironments([
             {
                 key: 'all',
@@ -35,9 +60,21 @@ export const PlantSelect = () => {
         ])
     }
 
+    async function fetchPlants() {
+        setLoading(true)
+
+        const {data} = await api.get('plants?_sort=name&_order=asc')
+        setPlants(data)
+        setFilteredPlants(data)
+        setLoading(false)
+    }
+
     useEffect(() => {
         fetchEnvironment()
+        fetchPlants()
     }, [])
+    
+    if(loading) return <Load />
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,15 +89,34 @@ export const PlantSelect = () => {
             </Text>
         </View>
 
-        <FlatList 
-            data={environments}
-            renderItem={({item}) => (
-                <EnvironmentButton key={item?.key} title={item.title} />
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.environmentList}
-        />
+        <View>
+            <FlatList 
+                data={environments}
+                renderItem={({item}) => (
+                    <EnvironmentButton 
+                        key={item?.key} 
+                        title={item.title} 
+                        active={item.key === environmentSelected} 
+                        onPress={() => handleEnvironmentSelected(item.key)}
+                    />
+                )}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.environmentList}
+            />
+        </View>
+
+        <View style={styles.plants}>
+            <FlatList 
+                data={filteredPlants}
+                renderItem={({item}) => (
+                    <PlantCardVertical key={item.id} name={item.name} photo={item.photo} />
+                )}
+                showsVerticalScrollIndicator={false}
+                numColumns={2}
+                contentContainerStyle={styles.plantList}
+            />
+        </View>
     </SafeAreaView>
   )
 }
@@ -89,7 +145,15 @@ const styles = StyleSheet.create({
         height: 40,
         paddingBottom: 5,
         marginLeft: 32,
-        marginVertical: 32,
+        marginVertical: 16,
         paddingRight: 64,
+    },
+    plants: {
+        flex: 1,
+        paddingHorizontal: 22,
+        justifyContent: "center"
+    },
+    plantList: {
+        paddingBottom: 64
     }
 })
