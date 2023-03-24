@@ -8,6 +8,7 @@ import fonts from '../styles/fonts'
 import DateTimePicker, {DateTimePickerEvent, Event} from '@react-native-community/datetimepicker'
 import {isBefore, format} from 'date-fns'
 import { PlantProps } from '../@types/Plant'
+import { getPlants, savePlant } from '../services/plant'
 
 interface Params {
     plant : PlantProps
@@ -40,10 +41,20 @@ export const PlantSave = () => {
         setShowDatePicker(true)
     }
 
-    function handleCloseDateTimePickerForAndroid() {
-        setShowDatePicker(false)
-    }
+    async function handleSavePlant() {
+        try {
+            await savePlant({
+                ...plant,
+                dateTimeNotification: selectedDateTime
+            })
 
+
+        } catch (error) {
+            console.log(error)
+            Alert.alert('Não foi possível salvar a planta')
+        }
+    }
+    
   return (
     <View style={styles.container}>
         <View style={styles.plantInfo}>
@@ -94,7 +105,7 @@ export const PlantSave = () => {
 
             <Button 
                 title='Confirmar'
-                onPress={() => {}}
+                onPress={handleSavePlant}
             />
         </View>
     </View>

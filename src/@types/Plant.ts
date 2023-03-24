@@ -9,8 +9,11 @@ export interface PlantProps {
         times: number
         repeat_every: string
     }
+    dateTimeNotification: Date
 }
 
-export interface PlantSaveProps extends PlantProps {
-    dateTimeNotification: Date
+export interface StoragePlantProps {
+    [id: string]: {
+        data: PlantProps
+    }
 }
