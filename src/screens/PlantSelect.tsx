@@ -148,6 +148,7 @@ export const PlantSelect = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.background
     },
     header: {
         paddingHorizontal: 30
