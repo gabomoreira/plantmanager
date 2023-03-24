@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import { ActivityIndicator, FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native"
+import { PlantProps } from "../@types/Plant"
 
 import { Button } from "../components/Button"
 import { EnvironmentButton } from "../components/EnvironmentButton"
@@ -15,19 +16,6 @@ import fonts from "../styles/fonts"
 interface EnvironmentProps {
     key: string
     title: string
-}
-
-interface PlantProps {
-    id: number
-    name: string
-    about: string
-    water_tips: string
-    photo: string
-    environments: [string]
-    frequency: {
-        times: number
-        repeat_every: string
-    }
 }
 
 export const PlantSelect = () => {
@@ -89,6 +77,10 @@ export const PlantSelect = () => {
         setLoadingMore(false)
     }
 
+    function handlePlantSelect(plant: PlantProps) {
+        navigation.navigate('PlantSave', {plant})
+    }
+
     useEffect(() => {
         fetchEnvironment()
         fetchPlants()
@@ -132,7 +124,12 @@ export const PlantSelect = () => {
                 data={filteredPlants}
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({item}) => (
-                    <PlantCardVertical key={item.id} name={item.name} photo={item.photo} />
+                    <PlantCardVertical 
+                        key={item.id} 
+                        name={item.name} 
+                        photo={item.photo} 
+                        onPress={() => handlePlantSelect(item)}
+                    />
                 )}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
