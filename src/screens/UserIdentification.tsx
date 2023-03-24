@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
-import { SafeAreaView, Text, View, StyleSheet, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native"
+import { SafeAreaView, Text, View, StyleSheet, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Alert } from "react-native"
 
 import { Button } from "../components/Button"
+import { saveUserName } from "../services/user"
 
 import colors from "../styles/colors"
 import fonts from "../styles/fonts"
@@ -12,7 +13,7 @@ export const UserIdentification = () => {
 
     const [isFocused, setIsFocused] = useState(false)
     const [isFilled, setIsFilled] = useState(false)
-    const [name, setName] = useState<string>()
+    const [name, setName] = useState<string>('')
 
     
     function hadleInputBlur() {
@@ -29,7 +30,10 @@ export const UserIdentification = () => {
         setName(value)
     }
 
-    function hadleConfirmation(){
+    async function hadleConfirmation(){
+        if(!name) return Alert.alert('Me diz como chamar você 🥲')
+
+        await saveUserName(name)
         navigation.navigate('Confirmation')
     }
 
@@ -45,7 +49,7 @@ export const UserIdentification = () => {
                     <View style={styles.form}>
                         <View style={styles.header}>
                             <Text style={styles.emoji}>
-                                { isFilled ? '😄' : '😀'}
+                                { name?.length > 2 ? '😄' : '😀'}
                             </Text>
                             <Text style={styles.title}>
                                 Como podemos {'\n'}
