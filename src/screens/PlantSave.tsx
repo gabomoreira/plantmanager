@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { Alert, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
@@ -18,6 +18,7 @@ export const PlantSave = () => {
     const [selectedDateTime, setSelectedDateTime] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios')
 
+    const navigation = useNavigation()
     const route = useRoute()
     const {plant} = route.params as Params
 
@@ -47,7 +48,13 @@ export const PlantSave = () => {
                 ...plant,
                 dateTimeNotification: selectedDateTime
             })
-
+            navigation.navigate('Confirmation', {
+                title: 'Prontinho',
+                subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.',
+                buttonTitle: 'Muito obrigado :D',
+                icon: 'hug',
+                nextScreen: 'MyPlants'
+            })
 
         } catch (error) {
             console.log(error)

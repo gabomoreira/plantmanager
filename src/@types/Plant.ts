@@ -10,6 +10,7 @@ export interface PlantProps {
         repeat_every: string
     }
     dateTimeNotification: Date
+    hour: string
 }
 
 export interface StoragePlantProps {

@@ -36,7 +36,13 @@ export const UserIdentification = () => {
         if(name.length > 15) return Alert.alert('O nome deve ter no máximo 15 caracteres')
 
         await saveUserName(name.trim())
-        navigation.navigate('Confirmation')
+        navigation.navigate('Confirmation', {
+            title: 'Prontinho',
+            subtitle: 'Agora vamos começar a cuidar \n das suas plantinhas com muito cuidado',
+            buttonTitle: 'Começar',
+            icon: 'smile',
+            nextScreen: 'PlantSelect'
+        })
     }
 
 

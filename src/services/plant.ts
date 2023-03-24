@@ -16,7 +16,7 @@ export async function savePlant(plant: PlantProps) : Promise<void> {
 
         await AsyncStorage.setItem(`${keyProject}:plants`, 
         JSON.stringify({
-            newPlant,
+            ...newPlant,
             ...oldPlants
         }))
 
@@ -29,6 +29,8 @@ export async function getPlants() : Promise<PlantProps[]> {
     try {
         const data = await AsyncStorage.getItem(`${keyProject}:plants`)
         const plants = data ? JSON.parse(data) as StoragePlantProps : {}
+
+        console.log(plants, 'plants storage')
         
         const plantsShorted = Object.keys(plants).map(plant => ({
             ...plants[plant].data,
@@ -42,6 +44,14 @@ export async function getPlants() : Promise<PlantProps[]> {
 
         return plantsShorted
 
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+export async function clearPlants() : Promise<void> {
+    try {
+        await AsyncStorage.clear()
     } catch (error: any) {
         throw new Error(error)
     }
