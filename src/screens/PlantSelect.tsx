@@ -41,7 +41,6 @@ export const PlantSelect = () => {
 
     const [page, setPage] = useState(1)
     const [loadingMore, setLoadingMore] = useState(false)
-    const [loadedAll, setLoadedAll] = useState(false)
 
     function handleEnvironmentSelected(environment: string) {
         setEnvironmentSelected(environment)
@@ -76,7 +75,7 @@ export const PlantSelect = () => {
     async function fetchPlants() {
         const {data} = await api.get(`plants?_sort=name&_order=asc&_page=${page}&_limit=6`)
 
-        if(!data) return setLoadedAll(true)
+        if(!data) return setLoading(true)
 
         if(page > 1) {
             setPlants(oldValue => [...oldValue, ...data])
@@ -113,6 +112,7 @@ export const PlantSelect = () => {
         <View>
             <FlatList 
                 data={environments}
+                keyExtractor={(item) => String(item.key)}
                 renderItem={({item}) => (
                     <EnvironmentButton 
                         key={item?.key} 
@@ -130,6 +130,7 @@ export const PlantSelect = () => {
         <View style={styles.plants}>
             <FlatList 
                 data={filteredPlants}
+                keyExtractor={(item) => String(item.id)}
                 renderItem={({item}) => (
                     <PlantCardVertical key={item.id} name={item.name} photo={item.photo} />
                 )}

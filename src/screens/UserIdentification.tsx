@@ -31,9 +31,11 @@ export const UserIdentification = () => {
     }
 
     async function hadleConfirmation(){
-        if(!name) return Alert.alert('Me diz como chamar você 🥲')
+        if(!name.trim()) return Alert.alert('Me diz como chamar você 🥲')
 
-        await saveUserName(name)
+        if(name.length > 15) return Alert.alert('O nome deve ter no máximo 15 caracteres')
+
+        await saveUserName(name.trim())
         navigation.navigate('Confirmation')
     }
 
