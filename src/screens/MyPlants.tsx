@@ -1,23 +1,43 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
-import { Header } from '../components/Header';
-import colors from '../styles/colors';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
+import React, { useEffect, useState } from 'react';
+import { Alert, FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { Header } from '../components/Header';
+import colors from '../styles/colors';
 
-import waterdrop from '../assets/waterdrop.png';
 import { PlantProps } from '../@types/Plant';
-import { clearPlants, getPlants } from '../services/plant';
-import { useFocusEffect } from '@react-navigation/native';
-import { Button } from '../components/Button';
-import fonts from '../styles/fonts';
-import { PlantCardHorizontal } from '../components/PlantCardHorizontal';
+import waterdrop from '../assets/waterdrop.png';
 import { Load } from '../components/Load';
+import { PlantCardHorizontal } from '../components/PlantCardHorizontal';
+import { deletePlant, getPlants } from '../services/plant';
+import fonts from '../styles/fonts';
 
 export const MyPlants = () => {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [nextWatered, setNextWatered] = useState<string>();
+
+  function handleRemove(plant: PlantProps) {
+    Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+      {
+        text: 'Não ',
+        style: 'cancel',
+      },
+      {
+        text: 'Sim ',
+        onPress: async () => {
+          try {
+            await deletePlant(plant.id);
+
+            setMyPlants((oldData) => oldData.filter((i) => i.id !== plant.id));
+          } catch (error) {
+            console.log(error);
+            Alert.alert('Erro', `Não foi possível remover a ${plant.name}`);
+          }
+        },
+      },
+    ]);
+  }
 
   async function fetchPlants() {
     setLoading(true);
@@ -64,6 +84,7 @@ export const MyPlants = () => {
               name={item.name}
               photo={item.photo}
               hour={item.hour}
+              handleRemove={() => handleRemove(item)}
             />
           )}
           showsVerticalScrollIndicator={false}
