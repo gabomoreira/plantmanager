@@ -1,20 +1,21 @@
 export interface PlantProps {
-    id: number
-    name: string
-    about: string
-    water_tips: string
-    photo: string
-    environments: [string]
-    frequency: {
-        times: number
-        repeat_every: string
-    }
-    dateTimeNotification: Date
-    hour: string
+  id: number;
+  name: string;
+  about: string;
+  water_tips: string;
+  photo: string;
+  environments: [string];
+  frequency: {
+    times: number;
+    repeat_every: string;
+  };
+  dateTimeNotification: Date;
+  hour: string;
 }
 
 export interface StoragePlantProps {
-    [id: string]: {
-        data: PlantProps
-    }
+  [id: string]: {
+    data: PlantProps;
+    notificationId: string;
+  };
 }
